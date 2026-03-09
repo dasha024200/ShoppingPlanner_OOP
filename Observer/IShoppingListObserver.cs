@@ -1,4 +1,4 @@
-namespace ShoppingPlanner.Observer
+namespace ShoppingPlanner_OOP.Observer
 {
     public interface IShoppingListObserver
     {

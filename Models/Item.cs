@@ -1,6 +1,4 @@
-using ShoppingPlanner.Models;
-
-namespace ShoppingPlanner.Models
+namespace ShoppingPlanner_OOP.Models
 {
     public class Item
     {
@@ -15,6 +13,11 @@ namespace ShoppingPlanner.Models
             Name = name;
             Price = price;
             Category = category;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} | {Category.Name} | {Price} грн";
         }
     }
 }

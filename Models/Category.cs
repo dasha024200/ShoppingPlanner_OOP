@@ -1,4 +1,4 @@
-namespace ShoppingPlanner.Models
+namespace ShoppingPlanner_OOP.Models
 {
     public class Category
     {
@@ -9,6 +9,11 @@ namespace ShoppingPlanner.Models
         {
             Id = Guid.NewGuid();
             Name = name;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

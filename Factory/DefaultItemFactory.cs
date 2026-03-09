@@ -1,6 +1,6 @@
-using ShoppingPlanner.Models;
+using ShoppingPlanner_OOP.Models;
 
-namespace ShoppingPlanner.Factory
+namespace ShoppingPlanner_OOP.Factory
 {
     public class DefaultItemFactory : ItemFactory
     {
