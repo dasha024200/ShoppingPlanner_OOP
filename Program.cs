@@ -3,6 +3,7 @@ using ShoppingPlanner_OOP.Context;
 using ShoppingPlanner_OOP.Factory;
 using ShoppingPlanner_OOP.Models;
 using ShoppingPlanner_OOP.Observer;
+using ShoppingPlanner_OOP.Services;
 using ShoppingPlanner_OOP.Strategy;
 
 namespace ShoppingPlanner_OOP
@@ -41,13 +42,17 @@ namespace ShoppingPlanner_OOP
             Console.WriteLine("\nСортування за ціною:");
             PrintItems(shoppingList.SortItems(sortContext));
 
-            sortContext.SetStrategy(new SortByCategory());
-            Console.WriteLine("\nСортування за категорією:");
-            PrintItems(shoppingList.SortItems(sortContext));
+            ShoppingListJsonService jsonService = new ShoppingListJsonService();
+            string filePath = "shoppinglist.json";
 
-            sortContext.SetStrategy(new SortByName());
-            Console.WriteLine("\nСортування за назвою:");
-            PrintItems(shoppingList.SortItems(sortContext));
+            jsonService.SaveToJson(shoppingList, filePath);
+            Console.WriteLine($"\nСписок збережено у файл: {filePath}");
+
+            ShoppingList loadedList = jsonService.LoadFromJson(filePath);
+
+            Console.WriteLine("\nСписок після завантаження з JSON:");
+            PrintItems(loadedList.GetItems());
+            Console.WriteLine($"\nСума завантаженого списку: {loadedList.GetTotal()} грн");
         }
 
         static void PrintItems(List<Item> items)
