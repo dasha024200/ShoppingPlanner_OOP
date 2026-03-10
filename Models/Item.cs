@@ -14,10 +14,5 @@ namespace ShoppingPlanner_OOP.Models
             Price = price;
             Category = category;
         }
-
-        public override string ToString()
-        {
-            return $"{Name} | {Category.Name} | {Price} грн";
-        }
     }
 }

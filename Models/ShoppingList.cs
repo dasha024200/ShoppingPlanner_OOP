@@ -19,11 +19,6 @@ namespace ShoppingPlanner_OOP.Models
             observers = new List<IShoppingListObserver>();
         }
 
-        public void AddObserver(IShoppingListObserver observer)
-        {
-            observers.Add(observer);
-        }
-
         public void AddItem(Item item)
         {
             items.Add(item);
@@ -46,7 +41,12 @@ namespace ShoppingPlanner_OOP.Models
 
         public decimal GetTotal()
         {
-            return items.Sum(i => i.Price);
+            return items.Sum(item => item.Price);
+        }
+
+        public void AddObserver(IShoppingListObserver observer)
+        {
+            observers.Add(observer);
         }
 
         public List<Item> GetItems()

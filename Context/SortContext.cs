@@ -16,7 +16,7 @@ namespace ShoppingPlanner_OOP.Context
         {
             if (strategy == null)
             {
-                throw new InvalidOperationException("Стратегію сортування не встановлено.");
+                return items;
             }
 
             return strategy.Sort(items);

@@ -24,11 +24,6 @@ namespace ShoppingPlanner_OOP.Budget
 
         public void SetBudget(decimal limit)
         {
-            if (limit < 0)
-            {
-                throw new ArgumentException("Бюджет не може бути від’ємним.");
-            }
-
             budgetLimit = limit;
         }
 
@@ -40,16 +35,6 @@ namespace ShoppingPlanner_OOP.Budget
         public bool IsOverLimit()
         {
             return currentTotal > budgetLimit;
-        }
-
-        public decimal GetBudgetLimit()
-        {
-            return budgetLimit;
-        }
-
-        public decimal GetCurrentTotal()
-        {
-            return currentTotal;
         }
     }
 }

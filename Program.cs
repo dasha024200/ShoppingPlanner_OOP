@@ -24,20 +24,16 @@ namespace ShoppingPlanner_OOP
 
             BudgetManager.Instance().SetBudget(300);
 
-            Item item1 = factory.CreateItem("Молоко", 45.50m, food);
-            Item item2 = factory.CreateItem("Навушники", 199.99m, tech);
-            Item item3 = factory.CreateItem("Пральний порошок", 120.00m, home);
-            Item item4 = factory.CreateItem("Хліб", 28.00m, food);
+            shoppingList.AddItem(factory.CreateItem("Молоко", 45.50m, food));
+            shoppingList.AddItem(factory.CreateItem("Навушники", 199.99m, tech));
+            shoppingList.AddItem(factory.CreateItem("Пральний порошок", 120.00m, home));
+            shoppingList.AddItem(factory.CreateItem("Хліб", 28.00m, food));
 
-            shoppingList.AddItem(item1);
-            shoppingList.AddItem(item2);
-            shoppingList.AddItem(item3);
-            shoppingList.AddItem(item4);
-
-            Console.WriteLine("\nУсі товари:");
+            Console.WriteLine("Усі товари:");
             PrintItems(shoppingList.GetItems());
 
             Console.WriteLine($"\nЗагальна сума: {shoppingList.GetTotal()} грн");
+            Console.WriteLine($"Перевищено бюджет: {BudgetManager.Instance().IsOverLimit()}");
 
             SortContext sortContext = new SortContext();
 
@@ -45,28 +41,20 @@ namespace ShoppingPlanner_OOP
             Console.WriteLine("\nСортування за ціною:");
             PrintItems(shoppingList.SortItems(sortContext));
 
-            sortContext.SetStrategy(new SortByName());
-            Console.WriteLine("\nСортування за назвою:");
-            PrintItems(shoppingList.SortItems(sortContext));
-
             sortContext.SetStrategy(new SortByCategory());
             Console.WriteLine("\nСортування за категорією:");
             PrintItems(shoppingList.SortItems(sortContext));
 
-            Console.WriteLine("\nВидаляємо товар 'Навушники'...");
-            shoppingList.RemoveItem(item2.Id);
-
-            Console.WriteLine("\nСписок після видалення:");
-            PrintItems(shoppingList.GetItems());
-
-            Console.WriteLine($"\nПідсумкова сума: {shoppingList.GetTotal()} грн");
+            sortContext.SetStrategy(new SortByName());
+            Console.WriteLine("\nСортування за назвою:");
+            PrintItems(shoppingList.SortItems(sortContext));
         }
 
         static void PrintItems(List<Item> items)
         {
             foreach (Item item in items)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"{item.Name} | {item.Category.Name} | {item.Price} грн");
             }
         }
     }
