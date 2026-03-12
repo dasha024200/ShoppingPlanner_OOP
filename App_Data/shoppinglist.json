@@ -1,0 +1,30 @@
+{
+  "Id": "91dbd363-aac2-43a5-a311-560fd7402420",
+  "Title": "My Shopping List",
+  "Items": [
+    {
+      "Id": "535abca9-3c06-4d2d-8b9b-8f9c5805182c",
+      "Name": "\u043F\u043E\u0440\u043E\u0448\u043E\u043A",
+      "Price": 340,
+      "CategoryId": "831df963-30c9-4ca7-852b-a15111ff19a8",
+      "CategoryName": "Household",
+      "ItemType": "HouseholdItem"
+    },
+    {
+      "Id": "d9513c61-ed7a-4cd7-8ea8-c177ab9ac2d0",
+      "Name": "\u0441\u0432\u0456\u0442\u043B\u043E",
+      "Price": 200,
+      "CategoryId": "f6f87b59-63ef-4752-bd11-a352b2c0dc15",
+      "CategoryName": "Electronics",
+      "ItemType": "ElectronicsItem"
+    },
+    {
+      "Id": "27e19510-dc54-4696-8fbc-b42f1bb14492",
+      "Name": "\u0425\u043B\u0456\u0431",
+      "Price": 32,
+      "CategoryId": "22877803-c857-4991-8ac5-62a87ac45c1a",
+      "CategoryName": "Food",
+      "ItemType": "FoodItem"
+    }
+  ]
+}

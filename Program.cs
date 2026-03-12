@@ -1,66 +1,50 @@
-﻿using ShoppingPlanner_OOP.Budget;
-using ShoppingPlanner_OOP.Context;
-using ShoppingPlanner_OOP.Factory;
-using ShoppingPlanner_OOP.Models;
-using ShoppingPlanner_OOP.Observer;
+﻿using ShoppingPlanner_OOP.Factory;
 using ShoppingPlanner_OOP.Services;
-using ShoppingPlanner_OOP.Strategy;
+using System.Globalization;
 
-namespace ShoppingPlanner_OOP
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Category food = new Category("Продукти");
-            Category tech = new Category("Техніка");
-            Category home = new Category("Для дому");
+    options.IdleTimeout = TimeSpan.FromHours(4);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
-            ItemFactory factory = new DefaultItemFactory();
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("uk-UA");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("uk-UA");
 
-            ShoppingList shoppingList = new ShoppingList("Мій список покупок");
+builder.Services.AddSingleton<DefaultItemFactory>();
+builder.Services.AddSingleton<PriceCalculator>();
+builder.Services.AddScoped<BudgetService>();
+builder.Services.AddScoped<BudgetObserver>();
+builder.Services.AddScoped<SortContext>();
+builder.Services.AddScoped<ShoppingSessionService>();
+builder.Services.AddSingleton<ShoppingListJsonService>();
+builder.Services.AddSingleton<CsvExportService>();
 
-            IShoppingListObserver budgetObserver = new BudgetObserver();
-            shoppingList.AddObserver(budgetObserver);
+var app = builder.Build();
 
-            BudgetManager.Instance().SetBudget(300);
-
-            shoppingList.AddItem(factory.CreateItem("Молоко", 45.50m, food));
-            shoppingList.AddItem(factory.CreateItem("Навушники", 199.99m, tech));
-            shoppingList.AddItem(factory.CreateItem("Пральний порошок", 120.00m, home));
-            shoppingList.AddItem(factory.CreateItem("Хліб", 28.00m, food));
-
-            Console.WriteLine("Усі товари:");
-            PrintItems(shoppingList.GetItems());
-
-            Console.WriteLine($"\nЗагальна сума: {shoppingList.GetTotal()} грн");
-            Console.WriteLine($"Перевищено бюджет: {BudgetManager.Instance().IsOverLimit()}");
-
-            SortContext sortContext = new SortContext();
-
-            sortContext.SetStrategy(new SortByPrice());
-            Console.WriteLine("\nСортування за ціною:");
-            PrintItems(shoppingList.SortItems(sortContext));
-
-            ShoppingListJsonService jsonService = new ShoppingListJsonService();
-            string filePath = "shoppinglist.json";
-
-            jsonService.SaveToJson(shoppingList, filePath);
-            Console.WriteLine($"\nСписок збережено у файл: {filePath}");
-
-            ShoppingList loadedList = jsonService.LoadFromJson(filePath);
-
-            Console.WriteLine("\nСписок після завантаження з JSON:");
-            PrintItems(loadedList.GetItems());
-            Console.WriteLine($"\nСума завантаженого списку: {loadedList.GetTotal()} грн");
-        }
-
-        static void PrintItems(List<Item> items)
-        {
-            foreach (Item item in items)
-            {
-                Console.WriteLine($"{item.Name} | {item.Category.Name} | {item.Price} грн");
-            }
-        }
-    }
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseSession();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Shopping}/{action=Index}/{id?}");
+
+app.Run();
