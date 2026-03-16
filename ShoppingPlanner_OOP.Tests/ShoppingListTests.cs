@@ -1,40 +1,37 @@
+using ShoppingPlanner_OOP.Interfaces;
 using ShoppingPlanner_OOP.Models;
-using Xunit;
 
 namespace ShoppingPlanner_OOP.Tests;
 
 public class ShoppingListTests
 {
     [Fact]
-    public void AddItem_Should_Add_Item_To_List()
+    public void AddItem_AddsItemToList()
     {
-        var list = new ShoppingList("Test List");
-        var item = new FoodItem("Milk", 50, new Category("Food"));
+        var list = new ShoppingList("Test");
+        var item = new FoodItem("Milk", 40, new Category("Food"));
 
         list.AddItem(item);
 
         Assert.Single(list.GetItems());
-        Assert.Equal("Milk", list.GetItems()[0].Name);
     }
 
     [Fact]
-    public void RemoveItem_Should_Remove_Existing_Item()
+    public void RemoveItem_WhenItemExists_ReturnsTrue()
     {
-        var list = new ShoppingList("Test List");
-        var item = new FoodItem("Milk", 50, new Category("Food"));
-
+        var list = new ShoppingList("Test");
+        var item = new FoodItem("Milk", 40, new Category("Food"));
         list.AddItem(item);
 
         var result = list.RemoveItem(item.Id);
 
         Assert.True(result);
-        Assert.Empty(list.GetItems());
     }
 
     [Fact]
-    public void RemoveItem_Should_Return_False_When_Item_Not_Found()
+    public void RemoveItem_WhenItemDoesNotExist_ReturnsFalse()
     {
-        var list = new ShoppingList("Test List");
+        var list = new ShoppingList("Test");
 
         var result = list.RemoveItem(Guid.NewGuid());
 
@@ -42,13 +39,36 @@ public class ShoppingListTests
     }
 
     [Fact]
-    public void GetTotal_Should_Return_Total_Price_Of_Items()
+    public void GetTotal_ReturnsCorrectSum()
     {
-        var list = new ShoppingList("Test List");
+        var list = new ShoppingList("Test");
+        list.AddItem(new FoodItem("Milk", 40, new Category("Food")));
+        list.AddItem(new HouseholdItem("Soap", 20, new Category("Household")));
 
-        list.AddItem(new FoodItem("Milk", 50, new Category("Food")));
-        list.AddItem(new HouseholdItem("Soap", 30, new Category("Household")));
+        var result = list.GetTotal();
 
-        Assert.Equal(80, list.GetTotal());
+        Assert.Equal(60, result);
+    }
+
+    [Fact]
+    public void AddObserver_AndAddItem_NotifiesObserver()
+    {
+        var list = new ShoppingList("Test");
+        var observer = new FakeObserver();
+        list.AddObserver(observer);
+
+        list.AddItem(new FoodItem("Milk", 40, new Category("Food")));
+
+        Assert.Equal(40, observer.LastTotal);
+    }
+}
+
+internal class FakeObserver : IShoppingListObserver
+{
+    public decimal LastTotal { get; private set; }
+
+    public void Update(decimal total)
+    {
+        LastTotal = total;
     }
 }

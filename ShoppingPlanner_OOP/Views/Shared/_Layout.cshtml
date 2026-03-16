@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Shopping Planner</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-navbar">
+            <div class="site-shell nav-shell">
+                <a class="site-brand" asp-controller="Home" asp-action="Index">Shopping Planner</a>
+
+                <div class="site-nav-links">
+                    <a class="site-link" asp-controller="Home" asp-action="Index">Головна</a>
+
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+{
+    <a class="site-link" asp-controller="Shopping" asp-action="Index">Мій список</a>
+    <a class="site-link" asp-controller="Shopping" asp-action="History">Історія</a>
+}
+@if (User.IsInRole("Admin"))
+{
+    <a class="site-link" asp-controller="Admin" asp-action="Index">Адмін панель</a>
+    <a class="site-link" asp-controller="Admin" asp-action="Lists">Всі списки</a>
+}
+                </div>
+
+                <div class="site-auth">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-shell">
+        <main class="main-content">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

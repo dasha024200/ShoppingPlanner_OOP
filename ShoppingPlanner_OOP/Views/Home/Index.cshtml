@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Головна";
+}
+
+<h1>Shopping Planner</h1>
+
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <h3>Адмін панель</h3>
+
+    <div class="admin-dashboard">
+
+        <div class="admin-card">
+            <h4>Користувачі</h4>
+            <p>Переглянути зареєстрованих користувачів</p>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="Index">
+                Відкрити
+            </a>
+        </div>
+
+        <div class="admin-card">
+            <h4>Списки покупок</h4>
+            <p>Переглянути всі списки покупок користувачів</p>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="Lists">
+                Відкрити
+            </a>
+        </div>
+
+    </div>
+}
+else
+{
+    <p>Сайт працює.</p>
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <a href="/Shopping">Перейти до списку покупок</a>
+    }
+}

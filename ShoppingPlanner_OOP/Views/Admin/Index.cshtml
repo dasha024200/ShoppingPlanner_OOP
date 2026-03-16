@@ -1,0 +1,30 @@
+@model List<ShoppingPlanner_OOP.Models.Identity.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Адмін панель";
+}
+
+<div class="card custom-card">
+    <h2 class="center-title">Зареєстровані користувачі</h2>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>UserName</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

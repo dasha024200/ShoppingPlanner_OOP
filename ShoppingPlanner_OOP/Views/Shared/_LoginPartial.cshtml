@@ -1,0 +1,17 @@
+@using Microsoft.AspNetCore.Identity
+@using ShoppingPlanner_OOP.Models.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="logout-form">
+        <span>@User.Identity?.Name</span>
+        <button type="submit" class="btn btn-outline-secondary btn-sm">Вийти</button>
+    </form>
+}
+else
+{
+    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-sm">Увійти</a>
+    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-sm">Реєстрація</a>
+}

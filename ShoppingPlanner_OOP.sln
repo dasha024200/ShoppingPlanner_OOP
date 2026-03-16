@@ -2,9 +2,9 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingPlanner_OOP", "ShoppingPlanner_OOP.csproj", "{0678FCF8-909D-1457-10AE-7605156384DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingPlanner_OOP", "ShoppingPlanner_OOP\ShoppingPlanner_OOP.csproj", "{0678FCF8-909D-1457-10AE-7605156384DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingPlanner_OOP.Tests", "..\ShoppingPlanner_OOP.Tests\ShoppingPlanner_OOP.Tests.csproj", "{7AA032D9-7113-41FF-AE32-D4235A92606F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingPlanner_OOP.Tests", "ShoppingPlanner_OOP.Tests\ShoppingPlanner_OOP.Tests.csproj", "{7AA032D9-7113-41FF-AE32-D4235A92606F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

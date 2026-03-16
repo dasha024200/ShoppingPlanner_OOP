@@ -1,40 +1,74 @@
 using ShoppingPlanner_OOP.Services;
-using Xunit;
 
 namespace ShoppingPlanner_OOP.Tests;
 
 public class BudgetServiceTests
 {
     [Fact]
-    public void SetBudget_And_UpdateTotal_Should_Calculate_RemainingBudget()
+    public void SetBudget_WithPositiveValue_SetsBudget()
     {
         var service = new BudgetService();
 
         service.SetBudget(500);
-        service.UpdateTotal(200);
 
-        Assert.Equal(300, service.GetRemainingBudget());
+        Assert.Equal(500, service.GetBudgetLimit());
     }
 
     [Fact]
-    public void IsOverLimit_Should_Return_True_When_Total_Exceeds_Budget()
+    public void SetBudget_WithNegativeValue_DoesNotChangeBudget()
     {
         var service = new BudgetService();
-
         service.SetBudget(300);
-        service.UpdateTotal(450);
 
-        Assert.True(service.IsOverLimit());
+        service.SetBudget(-100);
+
+        Assert.Equal(300, service.GetBudgetLimit());
     }
 
     [Fact]
-    public void IsOverLimit_Should_Return_False_When_Total_Is_Within_Budget()
+    public void UpdateTotal_AndGetRemainingBudget_ReturnsCorrectDifference()
     {
         var service = new BudgetService();
-
-        service.SetBudget(300);
+        service.SetBudget(1000);
         service.UpdateTotal(250);
 
-        Assert.False(service.IsOverLimit());
+        var result = service.GetRemainingBudget();
+
+        Assert.Equal(750, result);
+    }
+
+    [Fact]
+    public void IsOverLimit_WhenTotalGreaterThanBudget_ReturnsTrue()
+    {
+        var service = new BudgetService();
+        service.SetBudget(200);
+        service.UpdateTotal(250);
+
+        var result = service.IsOverLimit();
+
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void IsOverLimit_WhenTotalEqualsBudget_ReturnsFalse()
+    {
+        var service = new BudgetService();
+        service.SetBudget(200);
+        service.UpdateTotal(200);
+
+        var result = service.IsOverLimit();
+
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void GetCurrentTotal_ReturnsUpdatedValue()
+    {
+        var service = new BudgetService();
+        service.UpdateTotal(123.45m);
+
+        var result = service.GetCurrentTotal();
+
+        Assert.Equal(123.45m, result);
     }
 }

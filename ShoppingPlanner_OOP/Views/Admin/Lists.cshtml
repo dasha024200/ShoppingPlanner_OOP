@@ -1,0 +1,40 @@
+@model List<ShoppingPlanner_OOP.Models.Entities.ShoppingListEntity>
+
+@{
+    ViewData["Title"] = "Всі списки покупок";
+}
+
+<div class="card custom-card">
+
+<h2 class="center-title">Всі списки покупок користувачів</h2>
+
+<table class="items-table">
+
+<thead>
+<tr>
+<th>Користувач</th>
+<th>Назва списку</th>
+<th>Бюджет</th>
+<th>Дата створення</th>
+<th>Кількість товарів</th>
+</tr>
+</thead>
+
+<tbody>
+
+@foreach (var list in Model)
+{
+<tr>
+<td>@list.User?.Email</td>
+<td>@list.Title</td>
+<td>@list.BudgetLimit</td>
+<td>@list.CreatedAt.ToLocalTime().ToString("g")</td>
+<td>@(list.Items?.Count ?? 0)</td>
+</tr>
+}
+
+</tbody>
+
+</table>
+
+</div>

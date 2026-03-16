@@ -1,0 +1,264 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    color: #111;
+}
+
+.site-shell {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 28px;
+}
+
+.site-navbar {
+    width: 100%;
+}
+
+.nav-shell {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.site-brand {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1f3c88;
+    text-decoration: none;
+}
+
+.site-brand:hover {
+    color: #16306b;
+    text-decoration: none;
+}
+
+.site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.site-link {
+    color: #1f2937;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.site-link:hover {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.site-auth,
+.auth-panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.logout-form,
+.inline-form {
+    margin: 0;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.page-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 28px;
+}
+
+.custom-card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    margin-bottom: 28px;
+}
+
+.custom-card h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.form-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-control,
+.form-select {
+    width: 100%;
+    min-height: 46px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.btn {
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.actions-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.budget-box p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.status-good {
+    color: #198754;
+    font-weight: 700;
+}
+
+.status-bad {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+.center-title,
+.empty-text {
+    text-align: center;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.items-table th,
+.items-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 16px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 17px;
+}
+
+.items-table thead th {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.items-table form {
+    display: flex;
+    justify-content: center;
+}
+
+.history-block {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.history-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.custom-alert {
+    background: #e7f1ff;
+    color: #0b3d91;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+}
+
+.auth-page {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+hr {
+    display: none;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 992px) {
+    .page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-shell {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-auth,
+    .auth-panel,
+    .site-nav-links {
+        width: 100%;
+    }
+    .admin-dashboard{
+    display:flex;
+    gap:30px;
+    margin-top:30px;
+}
+
+.admin-card{
+    border:1px solid #ddd;
+    padding:20px;
+    border-radius:8px;
+    width:250px;
+    background:#f9f9f9;
+}
+}

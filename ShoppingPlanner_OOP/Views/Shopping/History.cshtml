@@ -1,0 +1,53 @@
+@model List<ShoppingPlanner_OOP.Models.Entities.ShoppingListEntity>
+
+@{
+    ViewData["Title"] = "Історія";
+}
+
+<div class="card custom-card">
+    <h2 class="center-title">Історія списків покупок</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <p class="empty-text">Історія поки що порожня.</p>
+    }
+    else
+    {
+        @foreach (var list in Model)
+        {
+            <div class="history-block">
+                <h3>@list.Title</h3>
+                <p><strong>Бюджет:</strong> @list.BudgetLimit</p>
+                <p><strong>Створено:</strong> @list.CreatedAt.ToLocalTime().ToString("g")</p>
+                <p><strong>Оновлено:</strong> @((list.UpdatedAt ?? list.CreatedAt).ToLocalTime().ToString("g"))</p>
+
+                @if (list.Items != null && list.Items.Any())
+                {
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Назва</th>
+                                <th>Ціна</th>
+                                <th>Категорія</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in list.Items)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.CategoryName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="empty-text">У цьому списку немає товарів.</p>
+                }
+            </div>
+        }
+    }
+</div>
